@@ -36,6 +36,10 @@ RUN set -ex \
 		chown -R 1000:elasticsearch "$path"; \
 	done
 
+RUN plugin install license
+
+RUN plugin install marvel-agent
+
 COPY config /usr/share/elasticsearch/config
 
 VOLUME /usr/share/elasticsearch/data

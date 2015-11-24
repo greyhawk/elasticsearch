@@ -42,7 +42,7 @@ RUN set -ex \
 		/usr/share/elasticsearch/config/scripts \
 	; do \
 		mkdir -p "$path"; \
-		chown -R 1000:elasticsearch "$path"; \
+		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
 

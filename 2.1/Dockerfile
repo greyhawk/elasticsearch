@@ -12,8 +12,8 @@ RUN arch="$(dpkg --print-architecture)" \
 
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
-ENV ELASTICSEARCH_MAJOR 2.0
-ENV ELASTICSEARCH_VERSION 2.0.1
+ENV ELASTICSEARCH_MAJOR 2.1
+ENV ELASTICSEARCH_VERSION 2.1.0
 ENV ELASTICSEARCH_REPO_BASE http://packages.elasticsearch.org/elasticsearch/2.x/debian
 
 RUN echo "deb $ELASTICSEARCH_REPO_BASE stable main" > /etc/apt/sources.list.d/elasticsearch.list
@@ -25,26 +25,18 @@ RUN set -x \
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-RUN plugin install license
-
-RUN plugin install marvel-agent
-
-COPY config /usr/share/elasticsearch/config
-
-COPY plugins /usr/share/elasticsearch/plugins
-
 RUN set -ex \
 	&& for path in \
 		/usr/share/elasticsearch/data \
 		/usr/share/elasticsearch/logs \
 		/usr/share/elasticsearch/config \
-		/usr/share/elasticsearch/plugins \
 		/usr/share/elasticsearch/config/scripts \
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+COPY config /usr/share/elasticsearch/config
 
 VOLUME /usr/share/elasticsearch/data
 

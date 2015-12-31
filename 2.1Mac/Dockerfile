@@ -45,8 +45,6 @@ RUN set -ex \
 		chown -R 1000:elasticsearch "$path"; \
 	done
 
-COPY config /usr/share/elasticsearch/config
-
 VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /

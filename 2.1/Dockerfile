@@ -25,11 +25,20 @@ RUN set -x \
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
+RUN plugin install license
+
+RUN plugin install marvel-agent
+
+COPY config /usr/share/elasticsearch/config
+
+COPY plugins /usr/share/elasticsearch/plugins
+
 RUN set -ex \
 	&& for path in \
 		/usr/share/elasticsearch/data \
 		/usr/share/elasticsearch/logs \
 		/usr/share/elasticsearch/config \
+		/usr/share/elasticsearch/plugins \
 		/usr/share/elasticsearch/config/scripts \
 	; do \
 		mkdir -p "$path"; \

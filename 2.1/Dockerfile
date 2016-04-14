@@ -25,10 +25,6 @@ RUN set -x \
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-RUN plugin install license
-
-RUN plugin install marvel-agent
-
 COPY config /usr/share/elasticsearch/config
 
 COPY plugins /usr/share/elasticsearch/plugins
